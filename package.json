@@ -1,0 +1,14 @@
+{
+    "name": "koa_web",
+    "version": "1.0.0",
+    "description": "koa_web",
+    "scripts": {
+        "start": "nodemon app.js"
+    },
+    "dependencies": {
+        "koa": "^2.13.0",
+        "koa-bodyparser": "^4.3.0",
+        "koa-router": "^10.0.0",
+        "nodemon": "^2.0.6"
+    }
+}
