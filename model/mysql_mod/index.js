@@ -1,6 +1,5 @@
 const fs=require('fs')
 const ini=require('ini')
-const path= require('path')
 var cfg=ini.parse(fs.readFileSync(process.cwd()+'/config/mysql.ini',"utf-8"))
 const {Sequelize } = require('sequelize');
 var sequelize=new Sequelize(cfg.mysql.database,cfg.mysql.username,cfg.mysql.password,{

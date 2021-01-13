@@ -13,22 +13,7 @@ app.use(bodyParser());
 app.use(err())
 app.use(res())
 app.use(router())
-let redis = require("redis"),
-    client = redis.createClient({
-        host:'106.54.91.179',
-        port:'5657',
-        password:'LINxiang@5'
-    });
-client.on("error", function (err) {
-    console.log("Error " + err);
-});
-client.on('ready',function (){
-    console.log('成功')
-})
-client.set('test','ok')
-client.get('a',function (err,data){
-    console.log(err,data)
-})
+
 // 在端口8000监听:
 app.listen(8000);
 

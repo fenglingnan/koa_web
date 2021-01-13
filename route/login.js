@@ -1,6 +1,8 @@
 const captchapng = require('captchapng');
 const router =require('koa-router')()
-const {sequelize,UserModel} =require('../model/login_mod');
+const {sequelize,UserModel} =require('../model/mysql_mod/login_mod');
+const md5=require('md5')
+const {client,expire}=require('../model/redis_mod/index')
 let IMGCODE;
 router.get('/code', async (ctx,next) => {
     await next()
@@ -20,6 +22,8 @@ router.post('/login',async (ctx,next)=>{
     let data=ctx.request.body;
     let ip=ctx.ip
     let res=await sequelize.sync()
+    let time=new Date().getTime()
+    let time_key=md5(time)
     const users = await UserModel.findOne({
         where:{
             username:data.username
@@ -33,6 +37,8 @@ router.post('/login',async (ctx,next)=>{
         ctx.body=ctx.back(null,'用户名或者密码错误',500)
         return
     }
-    ctx.body=ctx.back(null,'登录成功')
+    client.hmset(time_key, "user_id", users.user_id, "time", time);
+    client.expire(time_key,expire);
+    ctx.body=ctx.back({token:time_key},'登录成功')
 });
 module.exports=router
