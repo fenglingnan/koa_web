@@ -1,12 +1,17 @@
 const sequelize=require('./index')
-const {DataTypes: {INTEGER, MEDIUMINT, STRING}} = require('sequelize');
-const DiaryModel = sequelize.define('user', {
+const {DataTypes: {INTEGER, MEDIUMINT, STRING,TEXT}} = require('sequelize');
+const DiaryModel = sequelize.define('diarys', {
     // Model attributes are defined here
     id:{
         type: INTEGER,
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement:true,
+        defaultValue:0
+    },
+    u_id:{
+        type: INTEGER,
+        allowNull: false,
     },
     body: {
         type: MEDIUMINT,
@@ -16,6 +21,14 @@ const DiaryModel = sequelize.define('user', {
         type: STRING,
         allowNull: false
         // allowNull defaults to true
+    },
+    src:{
+        type: MEDIUMINT,
+        allowNull: false
+    },
+    user_name:{
+        type:TEXT,
+        allowNull: false
     }
 }, {
     timestamps: false

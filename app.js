@@ -7,12 +7,12 @@ const bodyParser = require('koa-bodyparser');
 //拆分路由
 const router =require('./route/index')
 const err=require('./route/error')
-const res=require('./responese/index')
+const res=require('./utils/index')
 app.proxy=true
 app.use(bodyParser());
 app.use(err())
 app.use(res())
-app.use(router())
+app.use(router.routes())
 
 // 在端口8000监听:
 app.listen(8000);

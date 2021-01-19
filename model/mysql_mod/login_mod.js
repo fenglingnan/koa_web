@@ -20,6 +20,10 @@ const UserModel = sequelize.define('user', {
     log_ip:{
         type: DataTypes.STRING,
         allowNull: false
+    },
+    head_img:{
+        type: DataTypes.STRING,
+        allowNull: false
     }
 }, {
     timestamps: false
