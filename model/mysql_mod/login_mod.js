@@ -23,6 +23,11 @@ const UserModel = sequelize.define('user', {
     },
     head_img:{
         type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue:'https://n.sinaimg.cn/translate/500/w800h500/20181215/Q3R6-hqhqcir2913318.jpg'
+    },
+    mobile:{
+        type: DataTypes.STRING(11),
         allowNull: false
     }
 }, {
