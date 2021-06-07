@@ -2,6 +2,7 @@ const list=require('./white')
 const {client}=require('../model/redis_mod/index')
 function res(){
     return async (ctx,next)=>{
+        //获取token
         ctx.get_key=function (){
             return new Promise(((resolve, reject) => {
                 client.hgetall(ctx.header.token,function (err,val){
@@ -21,7 +22,7 @@ function res(){
             }))
         }
 
-
+        // 全局通用返回
         ctx.back=function (data,msg,code){
             let obj={
                 code:code||'200',
