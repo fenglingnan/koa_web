@@ -27,5 +27,22 @@ router.get('/civilTree',async (ctx,next)=>{
         list:result?result:[]
     })
 })
+
+router.post('/civilContent',async (ctx,next)=>{
+    await next()
+    await ctx.get_key()
+    let data=ctx.request.body
+    if(!data.text&&!data.id){
+        ctx.body=ctx.back(null,'参数错误',500)
+        return
+    }
+    //目录选择查询
+    if(data.id){
+
+
+        return
+    }
+    //搜索查询
+})
 civil_router.use(router.routes())
 module.exports=civil_router

@@ -1,5 +1,5 @@
 const sequelize=require('./index')
-const {DataTypes: {INTEGER, MEDIUMINT, STRING,TEXT}} = require('sequelize');
+const {DataTypes: {INTEGER, MEDIUMINT, STRING, TEXT, TINYINT}} = require('sequelize');
 const CivilModel = sequelize.define('civil_laws',{
     id:{
         type: INTEGER,
@@ -25,6 +25,11 @@ const CivilModel = sequelize.define('civil_laws',{
     },
     title_support:{
         type: STRING(120),
+    },
+    last:{
+        type: TINYINT(1),
+        allowNull: false,
+        defaultValue:0
     }
 }, {
     timestamps: false
