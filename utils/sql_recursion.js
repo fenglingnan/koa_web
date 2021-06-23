@@ -40,10 +40,10 @@ module.exports = {
     civil_rec: `
         delimiter $$  
         drop function if exists get_civil_parent$$  
-        create function get_civil_parent(in_id int) returns int  
+        create function get_civil_parent(in_id varchar(10)) returns varchar(1000) 
         begin  
-            declare ids int;  
-            declare tempid int;  
+            declare ids varchar(1000);  
+            declare tempid varchar(10);  
            
             set tempid = in_id;  
             while tempid is not null do  
