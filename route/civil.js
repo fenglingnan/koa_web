@@ -1,7 +1,9 @@
 const router =require('koa-router')()
 const civil_router=require('koa-router')()
 const {CivilModel} =require('../model/mysql_mod/civil_law_mod');
-
+//此处使用sequelize原始查询必须有实例化之后sequelize
+const sequelize  = require('../model/mysql_mod/index')
+const UDF = require('../utils/sql_recursion')
 router.get('/civilTree',async (ctx,next)=>{
     await next()
     await ctx.get_key()
@@ -19,10 +21,14 @@ router.get('/civilTree',async (ctx,next)=>{
             }
         }
     }
+    try {
+        const rec = await sequelize.query(UDF.civil_rec)
+        console.log(rec)
+    } catch (e) {
+        console.log(e)
+    }
+
     let result=await CivilModel.findAll(list)
-
-    console.log(ctx.query)
-
     ctx.body=ctx.back({
         list:result?result:[]
     })
@@ -38,11 +44,17 @@ router.post('/civilContent',async (ctx,next)=>{
     }
     //目录选择查询
     if(data.id){
-
-
+        let result = await CivilModel.findOne({
+            where:{
+                id:data.id
+            }
+        });
+        console.log(result,JSON.stringify(result))
+        let level=result.level
         return
     }
     //搜索查询
+
 })
 civil_router.use(router.routes())
 module.exports=civil_router
