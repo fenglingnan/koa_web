@@ -4,6 +4,9 @@ const {CivilModel} =require('../model/mysql_mod/civil_law_mod');
 //此处使用sequelize原始查询必须有实例化之后sequelize
 const sequelize  = require('../model/mysql_mod/index')
 const UDF = require('../utils/sql_recursion')
+console.log(typeof UDF.civil_rec,123)
+//``返回的字符串需要去除\n，否则插入mysql报错
+//const TEST = UDF.civil_rec.replace(/[\r\n]/g,'')
 router.get('/civilTree',async (ctx,next)=>{
     await next()
     await ctx.get_key()
@@ -23,7 +26,7 @@ router.get('/civilTree',async (ctx,next)=>{
     }
     try {
         const rec = await sequelize.query(UDF.civil_rec)
-        console.log(rec)
+        console.log(123,rec)
     } catch (e) {
         console.log(e)
     }

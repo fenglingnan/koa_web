@@ -37,22 +37,5 @@ module.exports = {
         delimiter ;  
     `,
     //民法典页递归sql
-    civil_rec: `
-        delimiter $$  
-        drop function if exists get_civil_parent$$  
-        create function get_civil_parent(in_id varchar(10)) returns varchar(1000) 
-        begin  
-            declare ids varchar(1000);  
-            declare tempid varchar(10);  
-           
-            set tempid = in_id;  
-            while tempid is not null do  
-                set ids = CONCAT_WS(',',ids,tempid);  
-                select parent_id into tempid from civil_laws where id=tempid;  
-            end while;  
-            return ids;  
-        end  
-        $$  
-        delimiter ; 
-    `
+    civil_rec: `delimiter $$ drop function if exists get_civil_parent$$ create function get_civil_parent(in_id varchar(50)) returns varchar(1000) begin declare ids varchar(1000); declare tempid varchar(50); set tempid = in_id; while tempid is not null do set ids = CONCAT_WS(',',ids,tempid); select parent_id into tempid from civil_laws where id=tempid; end while; return ids; end $$ delimiter ; `
 }

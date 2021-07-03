@@ -2,14 +2,14 @@ const sequelize=require('./index')
 const {DataTypes: {INTEGER, MEDIUMINT, STRING, TEXT, TINYINT}} = require('sequelize');
 const CivilModel = sequelize.define('civil_laws',{
     id:{
-        type: INTEGER,
+        type: STRING(50),
         allowNull: false,
         primaryKey: true,
         autoIncrement:true,
         defaultValue:1
     },
     parent_id:{
-        type: INTEGER,
+        type: STRING(50),
     },
     title:{
         type: STRING(180),
